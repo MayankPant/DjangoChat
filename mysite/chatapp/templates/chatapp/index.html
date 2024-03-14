@@ -1,0 +1,16 @@
+{% extends 'chatapp/base.html' %}
+{% block body %}
+<h1 class="font-bold m-10">List of chat rooms</h1>
+
+{% for rooms in chatrooms %}
+
+    <div class="shadow p-10 m-10 bg-blue-700 text-white rounded-lg">
+
+        <a href="{% url 'chatroom' rooms.slug %}">{{ rooms }}</a>
+
+
+    </div>
+
+{% endfor %}
+
+{% endblock %}
