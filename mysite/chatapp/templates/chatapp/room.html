@@ -5,9 +5,10 @@
     {{ chatroom.name }}
 </div>
 
+{# overflow-auto: allows the container to be scrollable as a seperate entity over the page #}
 
-
-<div id='chat_messages'>
+<div class="message_container m-10  overflow-auto h-[700px]" id="message_container">
+    <div id='chat_messages'>
 
     
         {% for message in chat_messages %}
@@ -24,6 +25,7 @@
 
         </div>
         {% endfor %}
+    </div>
 </div>
 {# fixed - will prevent it from changing its postion. insert-x-0 fixing the x axis position. bottom-0 : will fix the y axis#}
 <div class="form-container fixed inset-x-0 bottom-0 bg-blue-900 mx-3 ml-3 mr-3 p-3">
@@ -50,17 +52,27 @@
     chatsocket.onmessage = function(e){
 
         const data = JSON.parse(e.data)
-
+        console.log(data.message)
         if(data.message){
             console.log('Recieved message from the client', data.message)
-            var currentDate = new Date()
-            let html = data.username + " : " + data.message + ' : ' + ' [ ' + currentDate.toDateString() + ' ] '
+            let html = '<div class="shadow-lg p-3 m-3 rounded-lg w-1/2 bg-blue-300">'
+                + '<div class="text-sm username text-gray-500">'
+                + data.username +
+                '</div>'
+                 + data.message + 
+                '<div class="text-sm date text-gray-500">'
+                 + 'Just Now' +
+                '</div>' +
+                '</div>'
+
             document.getElementById('chat_messages').innerHTML += html
+            scroll()
         }
 
         else{
             alert('Empty message')
         }
+        
     }
     chatsocket.onclose = function(e){
         console.log('websocket closed')
@@ -79,6 +91,11 @@
 
     }
 
+    function scroll(){
+        const mcontainer = document.getElementById('message_container')
+        mcontainer.scrollTop = mcontainer.scrollHeight
+    }
+    scroll()
 
 </script>
 
