@@ -44,7 +44,7 @@
     const chatRoomName = JSON.parse(document.getElementById('json-chatroomname').textContent)
     const chatsocket = new WebSocket(
         'ws://'  // protocol
-        + window.location.host // dynamically getting the host url.eh 127.0.0.1:8000
+        + window.location.host // dynamically getting the host url .eg 127.0.0.1:8000
         + '/ws/' // forming the url given in routing.py file
         + chatRoomName
         +'/'
