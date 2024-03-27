@@ -18,6 +18,9 @@ class ChatMessages(models.Model):
     message_content = models.TextField()
     date = models.DateTimeField(auto_now = True)
 
+    def __str__(self) -> str:
+        return self.message_content
+
 
     class Meta:
         ordering=('date',) # used for ordering messages with respect to date

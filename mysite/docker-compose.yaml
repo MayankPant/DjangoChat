@@ -8,7 +8,18 @@ services:
       - 8000:8000
     depends_on:
       - redis
+      - postgresql
   redis:
     image: redis:latest
     ports:
       - 6379:6379
+  postgresql:
+    image: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=mayankadmin
+      - POSTGRES_PASSWORD=*password@#
+      - POSTGRES_DB=chatapp

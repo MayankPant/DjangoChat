@@ -1,7 +1,7 @@
-FROM python:3.9.19-alpine
+FROM python:3.9-buster
 
+RUN apt-get update && apt-get install -y libpq-dev
 RUN pip install --upgrade pip
-RUN
 
 WORKDIR /usr/src/app
 COPY requirements.txt ./
